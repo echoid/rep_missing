@@ -1,0 +1,6 @@
+Imputer,Mean Squared Error,R2 Score
+genRBF zero,0.53926,0.25775
+genRBF mice,0.50472,0.30529
+genRBF mean,0.50422,0.30598
+Mean Imputer,0.62422,0.14081
+MICE Imputer,0.62325,0.14215

@@ -1,0 +1,6 @@
+Imputer,Accuracy Score,F1 Score
+genRBF zero,0.45238,0.0
+genRBF mice,0.69048,0.64865
+genRBF mean,0.71429,0.66667
+Mean Imputer,0.7381,0.75556
+MICE Imputer,0.7619,0.77273
