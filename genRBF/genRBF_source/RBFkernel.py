@@ -160,7 +160,34 @@ def p_trainTestID(test_id, S, completeDataId):
     return S_train, S_test, completeDataId_train, completeDataId_test
 
 import numpy as np
+"""
+Initialization: 
+    The function initializes an empty matrix gramRBF of shape 
+    (n_samples, n_samples)to store the computed Gram matrix.
 
+Case I (diagonal): 
+    It sets the diagonal elements of the Gram matrix to 1 and 
+    the off-diagonal elements to 0.
+
+Case II (no missing): 
+    For pairs of samples with no missing values (completeDataId),
+      it computes the pairwise similarity using the RBF kernel function
+        and stores the result in the Gram matrix.
+
+Case III (one missing): 
+    For pairs of samples where one sample has missing values 
+    (completeDataId[i]), it calculates the similarity based on the 
+    available features and uses a weighted sum to handle missing values.
+
+Case IV (two missing): 
+    For pairs of samples where both samples have missing values (S[i], S[j]), 
+    it computes the similarity based on the available features and uses a weighted
+      sum to handle missing values.
+
+Return: 
+    Finally, the function returns the computed Gram matrix.
+
+"""
 def p_krenel_train(gamma, X, new_X, Z, G, S, J, JJ, completeDataId, Ps):
     n_samples, n_features = X.shape
     gramRBF = np.empty((n_samples, n_samples), dtype=float)
@@ -179,7 +206,7 @@ def p_krenel_train(gamma, X, new_X, Z, G, S, J, JJ, completeDataId, Ps):
             scalar = 0.
             for ii in range(n_features):
                 scalar += (X[kk, ii] - X[jj, ii]) * (Z[kk, ii] - Z[jj, ii])
-            gramRBF[kk, jj] = np.exp(-gamma * scalar)
+            gramRBF[kk, jj] = np.exp(-gamma * scalar) #genRBF kernal
             gramRBF[jj, kk] = gramRBF[kk, jj]
 
 
@@ -198,7 +225,7 @@ def p_krenel_train(gamma, X, new_X, Z, G, S, J, JJ, completeDataId, Ps):
             temp_x = X[completeDataId[i], :] - X[S[id_], :]
             temp_z = Z[completeDataId[i], :] - Z[S[id_], :]
             w = np.einsum('ij,ij->i', temp_x, temp_z) - (2 * gamma) / (1 + 2 * gamma) * r
-            gramRBF[completeDataId[i], S[id_]] = z * np.exp(-gamma * w)
+            gramRBF[completeDataId[i], S[id_]] = z * np.exp(-gamma * w) #genRBF kernal
             gramRBF[S[id_], completeDataId[i]] = gramRBF[completeDataId[i], S[id_]]
 
 
@@ -224,7 +251,7 @@ def p_krenel_train(gamma, X, new_X, Z, G, S, J, JJ, completeDataId, Ps):
                         for kk in range(n_features):
                             scalar += (X[l, kk] - X[ll, kk]) * (Z[l, kk] - Z[ll, kk])
                         w = scalar - 4 * gamma * r / (1 + 4 * gamma)
-                        gramRBF[l, ll] = z * np.exp(-gamma * w)
+                        gramRBF[l, ll] = z * np.exp(-gamma * w) #genRBF kernal
                         gramRBF[ll, l] = gramRBF[l, ll]
             else:
                 ps_j = Ps[j]
@@ -252,7 +279,7 @@ def p_krenel_train(gamma, X, new_X, Z, G, S, J, JJ, completeDataId, Ps):
                     temp_x = X[S[i][ii], :] - X[S[j], :]
                     temp_z = Z[S[i][ii], :] - Z[S[j], :]
                     w = np.einsum('ij,ij->i', temp_x, temp_z) - np.einsum('ij,jk,ik->i', v, R, v)
-                    gramRBF[S[i][ii], S[j]] = z * np.exp(-gamma * w)
+                    gramRBF[S[i][ii], S[j]] = z * np.exp(-gamma * w) #genRBF kernal
                     gramRBF[S[j], S[i][ii]] = gramRBF[S[i][ii], S[j]]
     return gramRBF
 
