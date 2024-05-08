@@ -14,19 +14,30 @@ full_norm = ["full"]
 # para_list = [0.3]
 # full_norm = ["full"]
 
+
+
+
+for data in data_list:
+    for types in type_list:
+        for para in para_list:
+            for f_n in full_norm:
+            #command = f"python main_demo.py ./{data}_{types}/"
+                #command = f"python baseline.py {data} {types} {para} {f_n}"
+                #command = f"python ppca_run.py {data} {types} {para} {f_n}"
+                #command = f"python kernal_pca_run.py {data} {types} {para} {f_n}"
+                command = f"python ik_run.py {data} {types} {para} {f_n}"
+                print(command)
+                os.system(command)
+
+
 command = f"git add ."
 print(command)
 os.system(command)
 
+command = f'git commit -m "update IK"'
+print(command)
+os.system(command)
 
-# for data in data_list:
-#     for types in type_list:
-#         for para in para_list:
-#             for f_n in full_norm:
-#             #command = f"python main_demo.py ./{data}_{types}/"
-#                 #command = f"python baseline.py {data} {types} {para} {f_n}"
-#                 #command = f"python ppca_run.py {data} {types} {para} {f_n}"
-#                 #command = f"python kernal_pca_run.py {data} {types} {para} {f_n}"
-#                 command = f"python ik_run.py {data} {types} {para} {f_n}"
-#                 print(command)
-#                 os.system(command)
+command = f'git push'
+print(command)
+os.system(command)
