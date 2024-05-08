@@ -1,0 +1,4 @@
+Imputer,Accuracy Score,F1 Score
+zero,0.52147,0.30237
+mean,0.52147,0.30237
+mice,0.61055,0.39009
