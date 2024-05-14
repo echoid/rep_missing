@@ -1,0 +1,86 @@
+****************************************************
+*****                                          *****
+***** Below is an example of my setup.         *****
+*****                                          *****
+***** Please note:                             *****
+***** - This is tested only on Linux.          *****
+***** - This maybe not match a Windows system. *****
+*****                                          *****
+****************************************************
+
+Python Virtual Environment
+==========================
+
+Version: 3.11.2
+
+
+* Create the virtual environment in top level sub-directory
+
+python3 -m venv venv
+
+* Activate the virtual environment
+  - The prompt should change to (venv) at the start.
+
+source venv/bin/activate
+
+
+* (Optional but recommended) Updating virtual environment
+
+- Get the list:
+pip list --outdated
+
+- To do an update (e.g., pip)
+pip install --upgrade pip
+
+
+Current Starting List of Modules
+--------------------------------
+
+These should already be installed when setting up the virtual environment and updated.
+
+Package    Version
+---------- -------
+pip        24.0
+setuptools 69.5.1
+
+Modules to Install
+------------------
+
+These modules need to be added. Note that it will bring in other modules as needed.
+
+pip install <module>
+
+scikit-learn - 1.4.2
+pandas       - 2.2.2
+
+pymp-pypi    - 0.5.0   <--- Only on a Linux system. It does not exist on Windows.
+
+
+List after installing require modules
+-------------------------------------
+
+Package         Version
+--------------- --------
+joblib          1.4.0
+numpy           1.26.4
+pandas          2.2.2
+pip             24.0
+pymp-pypi       0.5.0
+python-dateutil 2.9.0.post0
+pytz            2024.1
+scikit-learn    1.4.2
+scipy           1.13.0
+setuptools      69.5.1
+six             1.16.0
+threadpoolctl   3.4.0
+tzdata          2024.1
+
+Run experiments
+---------------
+
+python -u test_sim.py
+
+
+* When finished with the virtual environment:
+
+deactivate
