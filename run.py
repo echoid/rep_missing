@@ -28,6 +28,7 @@ for data in data_list:
                 #command = f"python ppca_run.py {data} {types} {para} {f_n}"
                 #command = f"python kernal_pca_run.py {data} {types} {para} {f_n}"
                 command = f"python ik_run.py {data} {types} {para} {f_n}"
+                command = f"python ik_run2.py {data} {types} {para} {f_n}"
                 print(command)
                 os.system(command)
 
