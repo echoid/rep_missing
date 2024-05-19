@@ -8,8 +8,8 @@ from sklearn.impute import SimpleImputer, IterativeImputer
 from sklearn.svm import SVC
 from load_txt import load_txt
 from sklearn.decomposition import PCA, KernelPCA
-from ik import IKSimilarity,IKFeature,Isolation_Kernal
-from sklearn.neighbors import KDTree
+
+
 
 # ____________________MAIN FUNCTION_____________________#
 
@@ -74,39 +74,18 @@ def main():
                 X_test_imputed = zero_imputer.transform(X_test)
 
 
-#             #kernel_pca = KernelPCA(kernel="rbf")
-#             X_combined = np.vstack((X_train_imputed, X_test_imputed))
- 
-#             y_combined = np.vstack((y_train.reshape(-1, 1), y_test.reshape(-1, 1)))
 
-#             t = 200
-    
-#             train_feature = IKFeature(X_train_imputed,X_train_imputed,t=t)
-#             test_feature = IKFeature(X_test_imputed,X_train_imputed,t=t)
-        
-#             train_sim = np.dot(train_feature, train_feature.T) / t
-#             test_sim = np.dot(test_feature, train_feature.T) / t
-            
-            #component_mat_test =  IKSimilarity(X_train_imputed,X_test_imputed)
-        
-            IK = Isolation_Kernal()
-            IK.build_tree(X_train_imputed)
-            train_feature = IK.build_feature(X_train_imputed)
-            test_feature = IK.build_feature(X_test_imputed)
-            print("Train Shape",train_feature.shape)
-            print("Test Shape",test_feature.shape)
-            test_sim = IK.cal_similarity(test_feature,train_feature)
-            train_sim = IK.cal_similarity(train_feature,train_feature)
-            
-            print("Train Sim Shape",train_sim.shape)
-            print("Test Sim Shape",test_sim.shape)
+            kernel_pca = KernelPCA(kernel="rbf")
 
-            svm = SVC(C=C, kernel='precomputed')
-            svm.fit(train_sim, y_train)
-            y_pred = svm.predict(test_sim)
+            component_mat_train =  kernel_pca.fit(X_train_imputed).transform(X_train_imputed)
+            component_mat_test =  kernel_pca.transform(X_test_imputed)
+
+
+            svm = SVC(C=C, kernel='rbf')
+            svm.fit(component_mat_train, y_train)
+            y_pred = svm.predict(component_mat_test)
             acc = accuracy_score(y_test, y_pred)
             f1 = f1_score(y_test, y_pred, average='macro')
-
 
 
             acc_cv.append(acc)
@@ -133,7 +112,7 @@ def main():
 
 
     # Define the CSV file path
-    csv_file_name = "results/{}/{}/{}/{}_{}.csv".format("IK", dataname, types, para, full_norm)
+    csv_file_name = "results/{}/{}/{}/{}_{}.csv".format("KPCA_RBF", dataname, types, para, full_norm)
 
     # Check if the directory exists, and if not, create it
     directory = os.path.dirname(csv_file_name)
