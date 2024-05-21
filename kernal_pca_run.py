@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import SimpleImputer, IterativeImputer
 from sklearn.svm import SVC
-from load_txt import load_txt
+from load_txt import load_data
 from sklearn.decomposition import PCA, KernelPCA
 
 
@@ -16,14 +16,14 @@ from sklearn.decomposition import PCA, KernelPCA
 ## Only suitable for small amount of missing
 
 def main():
-    dataname, types, para, full_norm = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+    dataname, mech, para = sys.argv[1], sys.argv[2], sys.argv[3]
 
     # parameters for SVM
     C = 1
     gamma = 1.e-3
 
 
-    X, y, index, prefilled_path = load_txt(dataname, types, para, full_norm)
+    X,y, index = load_data(dataname,mech,para)
 
     acc_genRBF = []
     f1_genRBF = []
@@ -112,7 +112,7 @@ def main():
 
 
     # Define the CSV file path
-    csv_file_name = "results/{}/{}/{}/{}_{}.csv".format("KPCA_RBF", dataname, types, para, full_norm)
+    csv_file_name = "results/{}/{}/{}/{}.csv".format("KPCA_RBF", dataname, dataname, mech, para)
 
     # Check if the directory exists, and if not, create it
     directory = os.path.dirname(csv_file_name)

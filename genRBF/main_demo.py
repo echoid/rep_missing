@@ -8,7 +8,7 @@ from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import SimpleImputer, IterativeImputer
 from genRBF_source import RBFkernel as rbf
 from genRBF_source import cRBFkernel as fun
-from load_txt import load_txt
+from load_txt import load_data
 
 __author__ = "Łukasz Struski"
 
@@ -17,7 +17,7 @@ __author__ = "Łukasz Struski"
 
 
 def main():
-    dataname, types, para, full_norm = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+    dataname, mech, para = sys.argv[1], sys.argv[2], sys.argv[3]
 
     # parameters for SVM
     C = 1
@@ -25,9 +25,9 @@ def main():
 
     precomputed_svm = SVC(C=C, kernel='precomputed')
 
-    X, y, index, prefilled_path = load_txt(dataname, types, para, full_norm)
-
-
+    #X, y, index, prefilled_path = load_txt(dataname, types, para, full_norm)
+    X,y, index = load_data(dataname,mech,para)
+    print(X)
     acc_genRBF = []
     f1_genRBF = []
 
@@ -60,8 +60,10 @@ def main():
 
 
             # read data
-            m = np.genfromtxt(os.path.join('{}/{}/{}_{}_mu.txt'.format(prefilled_path,fill_type,full_norm,fold_n)), dtype=float, delimiter=',')
-            cov = np.genfromtxt(os.path.join('{}/{}/{}_{}_cov.txt'.format(prefilled_path,fill_type,full_norm,fold_n)), dtype=float, delimiter=',')
+            prefilled_path = f'prefilled_data/{fill_type}/{dataname}/{mech}/'
+            m = np.genfromtxt(os.path.join(f'{prefilled_path}/{para}_mu.txt'), dtype=float, delimiter=',')
+            cov = np.genfromtxt(os.path.join(f'{prefilled_path}/{para}_cov.txt'), dtype=float, delimiter=',')
+
 
             #print(m.dtype,cov.dtype,X_train.dtype)
             # train
@@ -109,7 +111,7 @@ def main():
 
 
     # Define the CSV file path
-    csv_file_name = "results/{}/{}/{}/{}_{}.csv".format("genRBF", dataname, types, para, full_norm)
+    csv_file_name = "results/{}/{}/{}/{}.csv".format("genRBF", dataname, mech, para)
 
     # Check if the directory exists, and if not, create it
     directory = os.path.dirname(csv_file_name)
@@ -118,6 +120,7 @@ def main():
 
     # Write the DataFrame to a CSV file
     df.to_csv(csv_file_name, index_label='Imputer')
+    print(df)
 
 if __name__ == "__main__":
     main()

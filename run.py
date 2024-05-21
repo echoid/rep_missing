@@ -1,20 +1,9 @@
 import os
 
-data_list = ["banknote", "climate_model_crashes", "connectionist_bench_sonar", "qsar_biodegradation", "yeast"]
-#data_list = [ "connectionist_bench_sonar", "qsar_biodegradation", "yeast"]
-data_list = ["banknote"]
-#data_list = ['concrete_compression','wine_quality_red','wine_quality_white','yacht_hydrodynamics']
-#type_list = ["logistic", "mar", "mcar"]
-type_list = ["mcar"]
-para_list = [0.5,0.3]
-full_norm = ["full"]
-
-
-# data_list = ["banknote"]
-# #data_list = ['concrete_compression','wine_quality_red','wine_quality_white','yacht_hydrodynamics']
-# type_list = ["mcar"]
-# para_list = [0.3]
-# full_norm = ["full"]
+data_list = ["banknote", "yeast", "climate_model_crashes"]
+#data_list = ['wine_quality_white','yacht_hydrodynamics','concrete_compression']
+type_list = ["mnar", "mar", "mcar"]
+para_list = [0.05,0.1,0.3,0.5]
 
 
 
@@ -22,15 +11,15 @@ full_norm = ["full"]
 for data in data_list:
     for types in type_list:
         for para in para_list:
-            for f_n in full_norm:
-            #command = f"python main_demo.py ./{data}_{types}/"
-                #command = f"python baseline.py {data} {types} {para} {f_n}"
-                #command = f"python ppca_run.py {data} {types} {para} {f_n}"
-                #command = f"python kernal_pca_run.py {data} {types} {para} {f_n}"
-                command = f"python ik_run.py {data} {types} {para} {f_n}"
-                command = f"python ik_run2.py {data} {types} {para} {f_n}"
-                print(command)
-                os.system(command)
+            #command = f"python genRBF/main_demo_reg.py {data} {types} {para}"
+            command = f"python baseline.py {data} {types} {para}"
+            os.system(command)
+            command = f"python ppca_run.py {data} {types} {para}"
+            os.system(command)
+            command = f"python kernal_pca_run.py {data} {types} {para}"
+            os.system(command)
+            command = f"python ik_run.py {data} {types} {para}"
+            os.system(command)
 
 
 # command = f"git add ."
