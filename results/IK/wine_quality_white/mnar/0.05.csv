@@ -1,0 +1,4 @@
+Imputer,RMSE Score,R2 Score
+zero,0.01344,0.38226
+mean,0.01344,0.38226
+mice,0.0133,0.3888
