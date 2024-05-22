@@ -22,7 +22,8 @@ def main():
     gamma = 1.e-3
 
 
-    X,y, index = load_data(dataname,mech,para)
+    X, y, index = load_data(dataname,mech,para)
+
 
     acc_genRBF = []
     f1_genRBF = []

@@ -1,0 +1,12 @@
+model,Imputer,Accuracy Score,F1 Score
+baseline,mean Imputer,0.44272,0.27402
+baseline,mice Imputer,0.44333,0.26111
+KPCA_RBF,zero,0.38078,0.19618
+KPCA_RBF,mean,0.38078,0.19618
+KPCA_RBF,mice,0.45349,0.28475
+PPCA,zero,0.36867,0.17229
+PPCA,mean,0.36867,0.17229
+PPCA,mice,0.42593,0.23349
+IK,zero,0.4178,0.26784
+IK,mean,0.35184,0.15504
+IK,mice,0.43327,0.27405

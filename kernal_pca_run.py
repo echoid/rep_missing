@@ -112,7 +112,7 @@ def main():
 
 
     # Define the CSV file path
-    csv_file_name = "results/{}/{}/{}/{}.csv".format("KPCA_RBF", dataname, dataname, mech, para)
+    csv_file_name = "results/{}/{}/{}/{}.csv".format("KPCA_RBF", dataname, mech, para)
 
     # Check if the directory exists, and if not, create it
     directory = os.path.dirname(csv_file_name)

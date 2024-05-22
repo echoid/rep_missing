@@ -33,7 +33,7 @@ def load_data(dataname,mech,rate):
     with open(f'data/{dataname}/split_index_cv_seed-1_nfold-5.json', 'r') as file:
         index = json.load(file)
     
-    return data,label,index
+    return data_with_nan,label,index
 
     
 

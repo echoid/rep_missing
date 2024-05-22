@@ -12,6 +12,7 @@ for data in data_list:
     for types in type_list:
         for para in para_list:
             #command = f"python genRBF/main_demo_reg.py {data} {types} {para}"
+            print(data,types,para)
             command = f"python baseline.py {data} {types} {para}"
             os.system(command)
             command = f"python ppca_run.py {data} {types} {para}"

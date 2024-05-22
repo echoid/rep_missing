@@ -1,3 +1,3 @@
 Imputer,RMSE Score,R2 Score
-mean Imputer,0.01371,0.37016
-mice Imputer,0.01367,0.37827
+mean Imputer,0.01429,0.3433
+mice Imputer,0.01433,0.34854

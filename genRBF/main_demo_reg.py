@@ -25,8 +25,6 @@ def main():
 
     #X, y, index, prefilled_path = load_txt(dataname, types, para, full_norm)
     X,y, index = load_data(dataname,mech,para)
-    print(X,y)
-
     acc_genRBF = []
     f1_genRBF = []
 
@@ -84,7 +82,7 @@ def main():
 
             y_pred = precomputed_svm.predict(test)
             # print(y_test)
-            # print(y_pred)
+            print(y_pred)
             acc = mean_squared_error(y_test, y_pred)
             f1 = r2_score(y_test, y_pred)
 
