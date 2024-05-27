@@ -88,7 +88,9 @@ def load_file(file_set):
             with open(file_set["file_stats"], mode = "rb") as f:
                 res = tomllib.load(f)
                 print("- Found some stats!")
-
+        else:
+            print("No stats")
+            print(res)
         return res
 
     X, Y = load_data()

@@ -20,6 +20,7 @@ def IKFeature(data, Sdata=None, psi=16, t=200, Sp=True):
         #print(distances)
         nn_indices = np.argmin(distances, axis=0)
         
+        
         # tree = KDTree(tdata) 
         # dist, nn_indices = tree.query(data, k=1)
         OneFeature = np.zeros((sizeN, psi), dtype=int)
