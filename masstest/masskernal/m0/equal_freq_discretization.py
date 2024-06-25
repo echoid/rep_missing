@@ -44,7 +44,6 @@ class EqualFrequencyDiscretizer(object):
     x_bin_ids = [-1 for i in range(self.n_dim)]
     for i in range(self.n_dim):
       if (self.stats is None) or ("Numeric" in self.stats["attribute"][i]["type"]):
-        print("Stuck here",i)
         cuts = self.bin_cuts[i]
         x_bin_ids[i] = bisect_left(cuts[1:-1], x[i])
       else:

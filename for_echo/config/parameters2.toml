@@ -1,0 +1,35 @@
+[general]
+normalise_data = true
+
+# Numeric data only
+
+[[file_names]]
+name = "Breast Cancer"
+file_name = "./data/bcw_fixed_missing_values.csv"
+has_header = true
+class_index = "last"
+
+# Mixed data
+
+[[file_names]]
+name = "abalone"
+file_name = "./data/abalone_test.csv"
+file_stats = "./data/abalone_test.csv.toml"
+has_header = false
+class_index = "last"
+
+# Nominal data only
+
+[[file_names]]
+name = "Chess"
+file_name = "./data/chess_shuffled_test.csv"
+file_stats = "./data/chess_shuffled_test.csv.toml"
+has_header = false
+class_index = "last"
+
+[[file_names]]
+name = "nursery"
+file_name = "./data/nursery_test_shuffled.csv"
+file_stats = "./data/nursery_test.csv.toml"
+has_header = false
+class_index = "last"

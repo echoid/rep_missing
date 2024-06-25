@@ -1,7 +1,7 @@
 from sklearn.model_selection import train_test_split
 
 from config import parameters as CFG
-from masskernal import M0_Kernel
+from kernel import M0_Kernel
 from utils import load_file, do_normalisation
 import numpy as np
 from sklearn import svm
